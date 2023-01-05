@@ -48,6 +48,6 @@ app.get('/test', (req, res) => {
 })
 
 //server started
-app.listen(3001, '0.0.0.0', (err) => {
+http.listen(3001, '0.0.0.0', (err) => {
 	console.log(`listening on port 3001`);
 })

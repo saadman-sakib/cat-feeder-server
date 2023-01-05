@@ -1,15 +1,15 @@
-const socket = io('http://10.0.0.2:5000/');
+const socket = io('http://192.168.0.228:3001/');
 const button = document.getElementById('btn');
 
 button.addEventListener('click', (e) => {
 	console.log("ff");
 	const chatForm = document.getElementById('msg');
-	socket.emit('test1', chatForm.value);
+	socket.emit('feed', chatForm.value);
 	console.log("yo");
 	e.preventDefault();
 })
 
-socket.on('chat', msg => {
+socket.on('feed', msg => {
 	const content = document.getElementById('content')
 	content.innerHTML += `<p> • ${msg}</p>`
 	console.log(msg);
