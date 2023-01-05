@@ -42,7 +42,12 @@ app.get('/', (req, res) => {
 	res.send('Hello World!')
 })
 
+app.get('/test', (req, res) => {
+	console.log("feeeed");
+	res.send('testing');
+})
+
 //server started
-http.listen(5000, (err) => {
-	console.log(`listening on port 5000`);
+http.listen(3001, (err) => {
+	console.log(`listening on port 3001`);
 })
