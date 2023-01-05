@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').createServer(app)
-var socket = require('socket.io')
+// var socket = require('socket.io')
 app.use(express.static('public'));
 
 //socket setup
@@ -12,14 +12,11 @@ const io = require('socket.io')(http, {
 io.on('connection', (socket) => {
 	console.log(`made socket connection ${socket.id}`);
 
-	socket.emit('message', 'Welcome to the chat');
-	
+	socket.emit('test', 'Welcome to the chat');
 
-	socket.on('test1', msg => {
-		io.local.emit('chat', "Hello people");
-		socket.emit('chat', msg);
-		socket.emit('test', "received");
-		console.log('haha', msg);
+	socket.on('feed', msg => {
+		console.log(msg);
+		socket.broadcast.emit('feed', msg);
 	})
 
 	socket.on('error', (err) => {
@@ -37,6 +34,13 @@ io.on('connection', (socket) => {
 io.on('disconnection', (socket) => {
 	console.log(  socket.sid +  ' user disconnected');
 });
+
+
+app.get('/', (req, res) => {
+	console.log("feeeed");
+	io.local.emit("feed", "feed");
+	res.send('Hello World!')
+})
 
 //server started
 http.listen(5000, (err) => {
